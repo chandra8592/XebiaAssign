@@ -3,9 +3,10 @@ package com.project.planets.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Planet {
+public class Planet implements Serializable {
 
     @SerializedName("count")
     @Expose
@@ -53,7 +54,7 @@ public class Planet {
     }
 
 
-    public class Result {
+    public class Result implements Serializable {
 
         @SerializedName("name")
         @Expose
@@ -94,9 +95,22 @@ public class Planet {
         @SerializedName("edited")
         @Expose
         private String edited;
+
+
+
         @SerializedName("url")
         @Expose
+
         private String url;
+        private int image;
+
+        public int getImage() {
+            return image;
+        }
+
+        public void setImage(int image) {
+            this.image = image;
+        }
 
         public String getName() {
             return name;

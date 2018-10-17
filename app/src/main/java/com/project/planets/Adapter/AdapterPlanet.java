@@ -1,6 +1,7 @@
 package com.project.planets.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.project.planets.Model.Planet;
+import com.project.planets.PlanetDetailsActivity;
 import com.project.planets.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -42,8 +46,18 @@ public class AdapterPlanet extends RecyclerView.Adapter<AdapterPlanet.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Planet.Result planet = planets.get(position);
+        final Planet.Result planet = planets.get(position);
         holder.txtPlanetName.setText(planet.getName());
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PlanetDetailsActivity.class);
+                intent.putExtra("planet", planet);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -61,9 +75,7 @@ public class AdapterPlanet extends RecyclerView.Adapter<AdapterPlanet.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            ButterKnife.bind(this,itemView);
-
-            txtPlanetName = itemView.findViewById(R.id.PlanetName);
+            ButterKnife.bind(this,itemView);
         }
     }
 }
